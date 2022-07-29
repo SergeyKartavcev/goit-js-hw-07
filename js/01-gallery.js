@@ -26,11 +26,11 @@ function createGelleryCard (images){
 
 
 function onImageClick(event){
-
   event.preventDefault();
- const instance = basicLightbox.create(`
-      <img  src="https://cdn.pixabay.com/photo/2019/05/14/16/43/himilayan-blue-poppy-4202825_1280.jpg">
-  `)
+const instance = basicLightbox.create(`
+class="gallery__image"
+<img  src="${original}">
+  `);
   
   instance.show()
 }
