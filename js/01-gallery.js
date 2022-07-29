@@ -5,8 +5,7 @@ console.log(galleryItems);
 const galleryImages = document.querySelector(".gallery");
 const cardMarkup = createGelleryCard (galleryItems);
 galleryImages.insertAdjacentHTML('beforeend', cardMarkup);
- galleryImages.addEventListener('click',onImageClick);
-
+  
 function createGelleryCard (images){
     return galleryItems.map(({preview, original, description}) =>{
     return `
@@ -25,26 +24,33 @@ function createGelleryCard (images){
 }
 
 
-function onImageClick(event){
+  
+
+galleryImages.addEventListener('click',createModalImage);
+
+
+
+function createModalImage (event){
   event.preventDefault();
+  const srcImg = event.target.dataset.source;
 const instance = basicLightbox.create(`
 class="gallery__image"
-<img  src="${original}">
+<img  src="${srcImg}">
+onClose: (instance) => {esc}
   `);
-  
+
   instance.show()
+  if(event.code === "Escape"){
+    instance.close(() => console.log('lightbox not visible anymore'));
+  }
+  
 }
 
+
+
+
+
+
+
+
 // document.addEventListener('keydown', close)
-
-
-// const instance = basicLightbox.create(`
-//     <div class="modal">
-//         <p>
-//             Your first lightbox with just a few lines of code.
-//             Yes, it's really that simple.
-//         </p>
-//     </div>
-// `)
-
-// instance.show()

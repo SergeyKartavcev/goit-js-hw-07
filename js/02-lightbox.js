@@ -33,3 +33,7 @@ captionType: 'attr',
 captionDelay: 250,
  });
  gallery.on('show.SimpleLightbox')
+
+
+
+ 
