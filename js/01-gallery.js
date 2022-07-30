@@ -24,9 +24,7 @@ function createGelleryCard (images){
 }
 
 
-  
-
-galleryImages.addEventListener('click',createModalImage);
+galleryImages.addEventListener('click',createModalImage);  
 
 
 
@@ -35,22 +33,27 @@ function createModalImage (event){
   const srcImg = event.target.dataset.source;
 const instance = basicLightbox.create(`
 class="gallery__image"
-<img  src="${srcImg}">
-onClose: (instance) => {esc}
-  `);
+<img  src="${srcImg}">`,
+{  onClose: (instance) => {
+  window.removeEventListener("keydown", onCloseKeyEsc);    
+  }, 
+   }  
+   );
+if (instance.show(instance)) {
+  window.addEventListener("keydown", onCloseKeyEsc); 
+ }
+function onCloseKeyEsc(e) {   
+   if (e.code === "Escape" && instance.visible()) { 
+         instance.close(); 
+        } 
+         }
+        };
 
-  instance.show()
-  if(event.code === "Escape"){
-    instance.close(() => console.log('lightbox not visible anymore'));
-  }
+
   
-}
+
+  
 
 
 
 
-
-
-
-
-// document.addEventListener('keydown', close)
